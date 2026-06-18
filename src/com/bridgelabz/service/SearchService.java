@@ -1,4 +1,7 @@
-package com.bridgelabz;
+package com.bridgelabz.service;
+
+import com.bridgelabz.inventory.RoomInventoryManager;
+import com.bridgelabz.model.Room;
 
 import java.util.Map;
 

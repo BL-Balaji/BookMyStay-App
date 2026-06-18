@@ -1,4 +1,4 @@
-package com.bridgelabz;
+package com.bridgelabz.model;
 import java.util.List;
 
 public class Room {
