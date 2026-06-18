@@ -59,4 +59,33 @@ public class RoomInventoryManager {
                     "Room Type Not Found : " + roomType);
         }
     }
+
+    /**
+     * Reduce available room count after booking
+     */
+    public void decrementRoomCount(String roomType) {
+
+        validateRoomType(roomType);
+
+        Room room = roomInventory.get(roomType);
+
+        if (room.getAvailableCount() <= 0) {
+            throw new IllegalStateException(
+                    "No rooms available.");
+        }
+
+        room.setAvailableCount(
+                room.getAvailableCount() - 1);
+    }
+
+    /**
+     * Check availability
+     */
+    public boolean isRoomAvailable(String roomType) {
+
+        validateRoomType(roomType);
+
+        return roomInventory.get(roomType)
+                .getAvailableCount() > 0;
+    }
 }

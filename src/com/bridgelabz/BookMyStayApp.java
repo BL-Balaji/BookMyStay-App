@@ -3,7 +3,7 @@ package com.bridgelabz;
 import com.bridgelabz.inventory.RoomInventoryManager;
 import com.bridgelabz.model.Reservation;
 import com.bridgelabz.service.BookingQueueService;
-import com.bridgelabz.service.SearchService;
+import com.bridgelabz.service.ReservationService;
 
 import java.util.List;
 
@@ -16,20 +16,15 @@ public class BookMyStayApp {
 
         inventoryManager.addRoomType(
                 "Single",
-                10,
+                2,
                 2500,
-                List.of("WiFi", "AC", "TV"));
+                List.of("WiFi", "AC"));
 
         inventoryManager.addRoomType(
                 "Double",
-                5,
+                1,
                 4500,
-                List.of("WiFi", "AC", "TV", "Mini Bar"));
-
-        SearchService searchService =
-                new SearchService(inventoryManager);
-
-        searchService.searchAvailableRooms();
+                List.of("WiFi", "TV"));
 
         BookingQueueService queueService =
                 new BookingQueueService();
@@ -43,8 +38,8 @@ public class BookMyStayApp {
         queueService.submitBookingRequest(
                 new Reservation(
                         "Rahul",
-                        "Double",
-                        3));
+                        "Single",
+                        1));
 
         queueService.submitBookingRequest(
                 new Reservation(
@@ -52,14 +47,27 @@ public class BookMyStayApp {
                         "Single",
                         1));
 
-        queueService.displayQueue();
+        ReservationService reservationService =
+                new ReservationService(
+                        inventoryManager);
 
-        System.out.println("\n");
+        while (
+                queueService.getPendingRequestCount()
+                        > 0) {
 
-        queueService.processNextRequest();
+            Reservation reservation =
+                    queueService.processNextRequest();
 
-        queueService.processNextRequest();
+            if (reservation != null) {
 
-        queueService.displayQueue();
+                System.out.println(
+                        reservationService
+                                .confirmBooking(
+                                        reservation));
+            }
+        }
+
+        reservationService
+                .displayAllocatedRooms();
     }
 }
