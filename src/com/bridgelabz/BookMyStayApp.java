@@ -1,4 +1,7 @@
 package com.bridgelabz;
+
+import java.util.List;
+
 public class BookMyStayApp {
 
     public static void main(String[] args) {
@@ -6,26 +9,48 @@ public class BookMyStayApp {
         RoomInventoryManager inventoryManager =
                 new RoomInventoryManager();
 
-        // Initialize Room Types
-        inventoryManager.addRoomType("Single", 20, 2500);
-        inventoryManager.addRoomType("Double", 15, 4000);
-        inventoryManager.addRoomType("Suite", 5, 8000);
+        inventoryManager.addRoomType(
+                "Single",
+                10,
+                2500,
+                List.of(
+                        "WiFi",
+                        "AC",
+                        "TV")
+        );
 
-        // Display Inventory
-        inventoryManager.displayInventory();
+        inventoryManager.addRoomType(
+                "Double",
+                5,
+                4500,
+                List.of(
+                        "WiFi",
+                        "AC",
+                        "TV",
+                        "Mini Bar")
+        );
 
-        // Update Inventory
-        inventoryManager.updateRoomCount("Single", 18);
+        inventoryManager.addRoomType(
+                "Suite",
+                0,
+                9000,
+                List.of(
+                        "WiFi",
+                        "AC",
+                        "TV",
+                        "Jacuzzi",
+                        "Balcony")
+        );
 
-        // Update Price
-        inventoryManager.updateRoomPrice("Suite", 9000);
+        SearchService searchService =
+                new SearchService(inventoryManager);
 
-        System.out.println("\nAvailable Single Rooms : "
-                + inventoryManager.getAvailableRooms("Single"));
+        // Search all available rooms
+        searchService.searchAvailableRooms();
 
-        System.out.println("Suite Price : ₹"
-                + inventoryManager.getRoomPrice("Suite"));
+        // Search specific room
+        searchService.searchRoom("Double");
 
-        inventoryManager.displayInventory();
+        searchService.searchRoom("Suite");
     }
 }
