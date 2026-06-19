@@ -6,6 +6,7 @@ public class BookingConfirmation {
     private String guestName;
     private String roomType;
     private String roomId;
+    private String status;
 
     public BookingConfirmation(String reservationId,
                                String guestName,
@@ -16,6 +17,7 @@ public class BookingConfirmation {
         this.guestName = guestName;
         this.roomType = roomType;
         this.roomId = roomId;
+        this.status = "CONFIRMED";
     }
 
     public String getReservationId() {
@@ -34,12 +36,21 @@ public class BookingConfirmation {
         return roomId;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
 
         return "\nReservation ID : " + reservationId +
                 "\nGuest : " + guestName +
                 "\nRoom Type : " + roomType +
-                "\nRoom ID : " + roomId;
+                "\nRoom ID : " + roomId +
+                "\nStatus : " + status;
     }
 }
