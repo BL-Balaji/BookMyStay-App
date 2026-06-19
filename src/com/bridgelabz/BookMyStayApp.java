@@ -3,7 +3,7 @@ package com.bridgelabz;
 import com.bridgelabz.inventory.RoomInventoryManager;
 import com.bridgelabz.model.Reservation;
 import com.bridgelabz.service.BookingQueueService;
-import com.bridgelabz.service.ReservationService;
+import com.bridgelabz.service.SearchService;
 
 import java.util.List;
 
@@ -16,15 +16,20 @@ public class BookMyStayApp {
 
         inventoryManager.addRoomType(
                 "Single",
-                2,
+                10,
                 2500,
-                List.of("WiFi", "AC"));
+                List.of("WiFi", "AC", "TV"));
 
         inventoryManager.addRoomType(
                 "Double",
-                1,
+                5,
                 4500,
-                List.of("WiFi", "TV"));
+                List.of("WiFi", "AC", "TV", "Mini Bar"));
+
+        SearchService searchService =
+                new SearchService(inventoryManager);
+
+        searchService.searchAvailableRooms();
 
         BookingQueueService queueService =
                 new BookingQueueService();
@@ -38,8 +43,8 @@ public class BookMyStayApp {
         queueService.submitBookingRequest(
                 new Reservation(
                         "Rahul",
-                        "Single",
-                        1));
+                        "Double",
+                        3));
 
         queueService.submitBookingRequest(
                 new Reservation(
@@ -47,27 +52,14 @@ public class BookMyStayApp {
                         "Single",
                         1));
 
-        ReservationService reservationService =
-                new ReservationService(
-                        inventoryManager);
+        queueService.displayQueue();
 
-        while (
-                queueService.getPendingRequestCount()
-                        > 0) {
+        System.out.println("\n");
 
-            Reservation reservation =
-                    queueService.processNextRequest();
+        queueService.processNextRequest();
 
-            if (reservation != null) {
+        queueService.processNextRequest();
 
-                System.out.println(
-                        reservationService
-                                .confirmBooking(
-                                        reservation));
-            }
-        }
-
-        reservationService
-                .displayAllocatedRooms();
+        queueService.displayQueue();
     }
 }
