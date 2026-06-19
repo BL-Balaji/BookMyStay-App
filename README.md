@@ -495,36 +495,6 @@ By implementing BookMyStay, developers will learn:
 * Reporting and auditing systems
 * Service-oriented architecture principles
 
----
-
-# Future Enhancements
-
-## UC7: Billing & Invoice Generation
-
-* Room cost calculation
-* Service cost calculation
-* Tax calculation
-* Final invoice generation
-
-## UC8: Payment Processing
-
-* UPI
-* Credit Card
-* Net Banking
-
-## UC9: Room Cancellation & Refund
-
-* Refund calculation
-* Cancellation policies
-
-## UC10: Analytics Dashboard
-
-* Occupancy reports
-* Revenue reports
-* Service utilization reports
-
----
-
 # Conclusion
 
 BookMyStay demonstrates the complete lifecycle of a hotel booking system using Java Collections and Object-Oriented Design. The application evolves incrementally through multiple use cases, allowing developers to understand how different data structures solve real-world business problems while maintaining scalability, performance, and maintainability.
